@@ -1,0 +1,7 @@
+# OpenCode / skills locais (grande, específico da máquina)
+.opencode/
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store

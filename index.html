@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finanças · como funciona o controle financeiro pessoal</title>
+<meta name="description" content="Conheça o Finanças: um painel pessoal que reúne contas, cartões, faturas, assinaturas e parcelas, projeta os próximos meses e guarda tudo no seu navegador.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#e9f2ed" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Finanças · controle financeiro pessoal">
+<meta property="og:description" content="Contas, cartões, faturas e assinaturas em um painel só. Sem cadastro, sem servidor.">
+<meta property="og:image" content="assets/dashboard-light.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b7a56'/%3E%3Ctext x='16' y='23' font-family='Arial,Helvetica,sans-serif' font-size='18' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&display=swap" rel="stylesheet">
+<script>(function(){try{var t=localStorage.getItem('cofre_theme_v1');if(t==='dark')document.documentElement.classList.add('theme-dark');document.documentElement.classList.add('js');}catch(e){document.documentElement.classList.add('js');}})();</script>
+<link rel="stylesheet" href="apresentacao.css">
+</head>
+<body>
+<a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Finanças, início">
+      <span class="brand-mark" aria-hidden="true">F</span>
+      <span class="brand-name">Finanças <em>pessoal</em></span>
+    </a>
+
+    <nav class="nav-links" aria-label="Seções da página">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#tour">Visão geral</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#seguranca">Privacidade</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Ativar tema escuro" title="Alternar tema">
+        <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path></svg>
+      </button>
+      <a class="btn btn-primary btn-sm nav-cta" href="app.html">Abrir o app</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <nav aria-label="Seções da página (celular)">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#tour">Visão geral</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#seguranca">Privacidade</a>
+      <a href="#duvidas">Dúvidas</a>
+      <a href="app.html">Abrir o app</a>
+    </nav>
+  </div>
+</header>
+
+<main id="mainContent">
+  <section class="hero" id="top">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-grid"></div>
+      <div class="hero-glow"></div>
+    </div>
+    <div class="wrap hero-grid-wrap">
+      <div class="hero-copy">
+        <p class="badge" data-reveal><span class="badge-dot" aria-hidden="true"></span>Controle financeiro pessoal<span class="badge-sep" aria-hidden="true">·</span>sem cadastro</p>
+        <h1 data-reveal style="--d:60ms"><span class="h1-strong">Todo o seu dinheiro,</span><br><span class="h1-soft">em uma única tela.</span></h1>
+        <p class="hero-lede" data-reveal style="--d:120ms">Contas, cartões, faturas e assinaturas no mesmo painel. O sistema soma, projeta e avisa antes do aperto.</p>
+        <div class="hero-cta" data-reveal style="--d:180ms">
+          <a class="btn btn-primary btn-lg" href="app.html">
+            Abrir o app
+            <svg class="ico-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </a>
+          <a class="btn btn-ghost btn-lg" href="#como-funciona">Ver como funciona</a>
+        </div>
+      </div>
+
+      <figure class="hero-art" data-reveal style="--d:140ms">
+        <div class="app-frame">
+          <div class="app-chrome">
+            <span class="chrome-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="chrome-label">Painel Finanças</span>
+            <span class="chrome-tag">prévia</span>
+          </div>
+          <img src="assets/dashboard-light.webp" width="1500" height="1200" alt="Painel do Finanças mostrando saldo disponível de R$ 24.000,35, saídas e entradas do mês, alerta de gastos, últimas transações, gráfico de gastos por categoria e faturas dos cartões." fetchpriority="high" decoding="async">
+        </div>
+        <figcaption>Painel real do aplicativo, com dados de exemplo.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="promises" aria-label="Princípios do aplicativo">
+    <div class="wrap promises-grid">
+      <div class="promise">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="m17 11 4 4M21 11l-4 4"></path></svg>
+        <span>Sem cadastro</span>
+      </div>
+      <div class="promise">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="14" rx="2"></rect><path d="M8 22h8M12 18v4M6 8h.01M6 12h4"></path></svg>
+        <span>Sem servidor</span>
+      </div>
+      <div class="promise">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
+        <span>Backup em JSON</span>
+      </div>
+      <div class="promise">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9c0-.5 0-1-.1-1.5A7 7 0 0 1 12 3Z"></path></svg>
+        <span>Claro e escuro</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="como-funciona">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Como funciona</p>
+        <h2>Do caos ao mês planejado.</h2>
+        <p class="section-lede">O app foi desenhado para responder uma pergunta simples: como está o meu dinheiro agora e o que vem pela frente?</p>
+      </div>
+
+      <ol class="steps">
+        <li data-reveal>
+          <span class="step-index">01</span>
+          <div class="step-body">
+            <h3>Responda 9 perguntas rápidas</h3>
+            <p>Nome, objetivo, bancos, contas, cartões, parcelas, assinaturas, gastos fixos e tema. O guia monta o painel com o que você já tem, sem obrigar a preencher tudo.</p>
+          </div>
+        </li>
+        <li data-reveal>
+          <span class="step-index">02</span>
+          <div class="step-body">
+            <h3>Registre o dia a dia</h3>
+            <p>Pix, débito, crédito, boleto ou compra parcelada. Cada lançamento atualiza saldo, fatura, categoria e projeção. Dá para editar, excluir e desfazer.</p>
+          </div>
+        </li>
+        <li data-reveal>
+          <span class="step-index">03</span>
+          <div class="step-body">
+            <h3>Leia o mês em segundos</h3>
+            <p>Saldo somado, entradas e saídas, gasto por categoria, limite usado e um diagnóstico de saúde financeira que destaca o que pede atenção.</p>
+          </div>
+        </li>
+        <li data-reveal>
+          <span class="step-index">04</span>
+          <div class="step-body">
+            <h3>Planeje o que ainda vem</h3>
+            <p>A projeção dos próximos três meses junta parcelas, assinaturas e faturas. Você enxerga o aperto antes que ele chegue e sabe quanto precisa reservar.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section tour" id="tour" aria-labelledby="tour-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="tour-title">Um painel, seis leituras do mesmo mês.</h2>
+        <p class="section-lede">As mesmas informações, organizadas pelo tipo de decisão que você precisa tomar.</p>
+      </div>
+
+      <div class="tour-grid">
+        <div class="tour-rail" role="tablist" aria-label="Áreas do aplicativo" aria-orientation="vertical">
+          <button class="tour-tab is-active" id="tab-painel" type="button" role="tab" aria-selected="true" aria-controls="panel-painel" tabindex="0">
+            <span class="tt-num">01</span>
+            <span class="tt-text"><span class="tt-name">Painel</span><span class="tt-desc">Saldo, fluxo do mês, categorias, faturas e saúde.</span></span>
+            <svg class="tt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+          <button class="tour-tab" id="tab-transacoes" type="button" role="tab" aria-selected="false" aria-controls="panel-transacoes" tabindex="-1">
+            <span class="tt-num">02</span>
+            <span class="tt-text"><span class="tt-name">Transações</span><span class="tt-desc">Tudo o que entrou e saiu, com filtros que ajudam.</span></span>
+            <svg class="tt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+          <button class="tour-tab" id="tab-cartoes" type="button" role="tab" aria-selected="false" aria-controls="panel-cartoes" tabindex="-1">
+            <span class="tt-num">03</span>
+            <span class="tt-text"><span class="tt-name">Cartões</span><span class="tt-desc">Fatura por ciclo, limite disponível e vencimento.</span></span>
+            <svg class="tt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+          <button class="tour-tab" id="tab-rendas" type="button" role="tab" aria-selected="false" aria-controls="panel-rendas" tabindex="-1">
+            <span class="tt-num">04</span>
+            <span class="tt-text"><span class="tt-name">Rendas</span><span class="tt-desc">Salário, vales e entradas fixas com data prevista.</span></span>
+            <svg class="tt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+          <button class="tour-tab" id="tab-parcelados" type="button" role="tab" aria-selected="false" aria-controls="panel-parcelados" tabindex="-1">
+            <span class="tt-num">05</span>
+            <span class="tt-text"><span class="tt-name">Parcelados</span><span class="tt-desc">O progresso de cada compra e o que falta quitar.</span></span>
+            <svg class="tt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+          <button class="tour-tab" id="tab-apagar" type="button" role="tab" aria-selected="false" aria-controls="panel-apagar" tabindex="-1">
+            <span class="tt-num">06</span>
+            <span class="tt-text"><span class="tt-name">A pagar</span><span class="tt-desc">O que vence nos próximos dias e meses.</span></span>
+            <svg class="tt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+        </div>
+
+        <div class="tour-stage">
+          <div class="stage-frame" id="tourStage">
+            <figure class="tour-panel" id="panel-painel" role="tabpanel" aria-labelledby="tab-painel" tabindex="0">
+              <img src="assets/dashboard-light.webp" width="1500" height="1200" alt="Tela do painel com saldo de R$ 24.000,35, saídas de R$ 4.094,03, entradas de R$ 7.700, últimas transações e gráfico de gastos por categoria." decoding="async">
+            </figure>
+            <figure class="tour-panel" id="panel-transacoes" role="tabpanel" aria-labelledby="tab-transacoes" tabindex="0" hidden>
+              <img src="assets/transacoes.webp" width="1500" height="1060" alt="Tela de transações com filtros por descrição, categoria, tipo, conta e mês, e uma tabela de lançamentos." loading="lazy" decoding="async">
+            </figure>
+            <figure class="tour-panel" id="panel-cartoes" role="tabpanel" aria-labelledby="tab-cartoes" tabindex="0" hidden>
+              <img src="assets/cartoes.webp" width="1500" height="1060" alt="Tela de cartões com dois cartões, resumo de limite utilizado e lista de faturas em aberto." loading="lazy" decoding="async">
+            </figure>
+            <figure class="tour-panel" id="panel-rendas" role="tabpanel" aria-labelledby="tab-rendas" tabindex="0" hidden>
+              <img src="assets/rendas.webp" width="1500" height="1200" alt="Tela de rendas com previsão mensal de R$ 8.500, salário, vale alimentação e freelance com as próximas datas de recebimento." loading="lazy" decoding="async">
+            </figure>
+            <figure class="tour-panel" id="panel-parcelados" role="tabpanel" aria-labelledby="tab-parcelados" tabindex="0" hidden>
+              <img src="assets/parcelados.webp" width="1500" height="1060" alt="Tela de compras parceladas com o iPhone 15 em 4 de 10 parcelas e o sofá retrátil em 2 de 6, com valores e botões para pagar o mês." loading="lazy" decoding="async">
+            </figure>
+            <figure class="tour-panel" id="panel-apagar" role="tabpanel" aria-labelledby="tab-apagar" tabindex="0" hidden>
+              <img src="assets/apagar.webp" width="1500" height="1060" alt="Tela a pagar com a projeção de contas dos próximos meses, incluindo parcelas, faturas e assinaturas." loading="lazy" decoding="async">
+            </figure>
+          </div>
+          <p class="stage-note"><span aria-hidden="true">▸</span> Imagens do aplicativo com dados de exemplo. Nada é enviado para fora do navegador.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section details" id="recursos">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>O cuidado está nos detalhes.</h2>
+        <p class="section-lede">Além do painel, o app cobre o que costuma escapar das planilhas.</p>
+      </div>
+
+      <div class="bento">
+        <article class="cell cell-market" data-reveal>
+          <span class="cell-icon cell-icon-light" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"></path><path d="M17 7h4v4"></path></svg>
+          </span>
+          <h3>Mercado sem ruído.</h3>
+          <p>Selic, IPCA, dólar PTAX e uma watchlist que você monta. As cotações vêm da brapi, com token opcional, e ficam em cache para não pesar.</p>
+          <div class="ticker-row" aria-label="Exemplos de ativos disponíveis na watchlist">
+            <span>PETR4</span><span>VALE3</span><span>ITUB4</span><span>MGLU3</span>
+          </div>
+        </article>
+
+        <article class="cell cell-theme" data-reveal>
+          <h3>Claro ou escuro</h3>
+          <p>O tema acompanha sua escolha e vale para o app e para esta página.</p>
+          <div class="theme-thumbs">
+            <figure>
+              <img src="assets/dashboard-light.webp" width="1500" height="1200" alt="Prévia do painel no tema claro." loading="lazy" decoding="async">
+              <figcaption>Claro</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/dashboard-dark.webp" width="1500" height="1200" alt="Prévia do painel no tema escuro." loading="lazy" decoding="async">
+              <figcaption>Escuro</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="cell" data-reveal>
+          <span class="cell-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"></circle><circle cx="19" cy="13" r="2.5"></circle><circle cx="6" cy="12" r="2.5"></circle><circle cx="10" cy="19" r="2.5"></circle><path d="M11.5 8.5 8.5 10M15.5 8l2 3M8 14l1 2.5"></path></svg>
+          </span>
+          <h3>Suas categorias</h3>
+          <p>Crie categorias com nome e cor. Gastos e ganhos aparecem agrupados do seu jeito, com legenda e ícone.</p>
+          <div class="swatches" aria-hidden="true"><i style="--c:#E05252"></i><i style="--c:#E0A752"></i><i style="--c:#99E052"></i><i style="--c:#52E0B6"></i><i style="--c:#528BE0"></i><i style="--c:#C452E0"></i></div>
+        </article>
+
+        <article class="cell" data-reveal>
+          <span class="cell-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>
+          </span>
+          <h3>Um backup de verdade</h3>
+          <p>Exporte tudo em um arquivo JSON e importe em outro navegador. Sem conta para recuperar e sem surpresa.</p>
+          <span class="file-chip">financas-backup.json</span>
+        </article>
+
+        <article class="cell" data-reveal>
+          <span class="cell-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 10h.01M10 10h.01M14 10h.01M6 14h12"></path></svg>
+          </span>
+          <h3>Acessível por padrão</h3>
+          <p>Navegação por teclado, foco visível, contraste alto e respeito a quem prefere menos movimento na tela.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section calc" id="calculos">
+    <div class="wrap calc-grid">
+      <div class="calc-intro">
+        <h2>Por dentro dos números.</h2>
+        <p class="section-lede">Nada de saldo mágico. Cada valor tem uma regra simples, aplicada na hora, dentro do seu navegador.</p>
+        <p class="calc-note">As contas abaixo são as mesmas usadas pelo aplicativo. Se um lançamento muda, o painel inteiro se recalcula.</p>
+      </div>
+
+      <div class="calc-list">
+        <article class="calc-row" data-reveal>
+          <div class="calc-head"><h3>Saldo disponível</h3><code>saldo = Σ contas</code></div>
+          <p>Soma o saldo de todas as contas cadastradas. Pix, débito e boleto reduzem na hora; crédito e parcelado entram na fatura, não no saldo.</p>
+        </article>
+        <article class="calc-row" data-reveal>
+          <div class="calc-head"><h3>Fatura do cartão</h3><code>fatura = Σ compras no ciclo</code></div>
+          <p>O ciclo começa no dia de fechamento e termina no fechamento seguinte. Compras e parcelas com data dentro do período entram na fatura.</p>
+        </article>
+        <article class="calc-row" data-reveal>
+          <div class="calc-head"><h3>Previsão de gastos</h3><code>previsão = assinaturas + parcelas</code></div>
+          <p>Para os próximos três meses, soma as assinaturas ainda não pagas no mês e as parcelas com vencimento em cada mês.</p>
+        </article>
+        <article class="calc-row" data-reveal>
+          <div class="calc-head"><h3>Saídas do mês</h3><code>saídas = Σ saídas − liquidadas</code></div>
+          <p>Pagamentos de fatura e de parcela já liquidados ficam fora da soma para não contar duas vezes. O restante é o gasto real do mês.</p>
+        </article>
+        <article class="calc-row" data-reveal>
+          <div class="calc-head"><h3>Saúde financeira</h3><code>atrasos · saldo × vencimentos · variação</code></div>
+          <p>Fica vermelho com conta atrasada, saldo negativo ou vencimentos de 15 dias maiores que o saldo. Fica amarelo com gastos subindo mais de 8% ou mês no vermelho.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="privacy" id="seguranca">
+    <div class="wrap privacy-grid">
+      <div>
+        <p class="kicker kicker-light">Privacidade</p>
+        <h2>O painel mora no seu navegador.</h2>
+        <p class="privacy-lede">Não existe cadastro, servidor ou sincronização. Seus lançamentos ficam no armazenamento local do navegador, acessíveis só por este dispositivo.</p>
+        <ul class="priv-points">
+          <li>
+            <span class="priv-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6z"></path><path d="m9 12 2 2 4-4"></path></svg></span>
+            <div><strong>Sem conta e sem nuvem</strong><span>Abra a página e comece. Nenhum dado financeiro sai do seu computador.</span></div>
+          </li>
+          <li>
+            <span class="priv-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg></span>
+            <div><strong>Portátil por backup</strong><span>Exporte tudo em JSON e restaure no navegador que quiser.</span></div>
+          </li>
+          <li>
+            <span class="priv-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path></svg></span>
+            <div><strong>Você pode apagar tudo</strong><span>Use “Zerar dados” ou limpe o armazenamento do navegador. O controle é seu.</span></div>
+          </li>
+        </ul>
+        <p class="privacy-note">A única chamada externa é para cotações de mercado (brapi e indicadores públicos). Ela envia apenas o ticker consultado, nunca seus lançamentos.</p>
+      </div>
+
+      <aside class="code-card" aria-label="Como os dados são armazenados">
+        <div class="code-head"><span class="code-dot" aria-hidden="true"></span><span>armazenamento local</span></div>
+        <dl>
+          <div><dt>chave</dt><dd>cofre_financas_v4</dd></div>
+          <div><dt>formato</dt><dd>JSON</dd></div>
+          <div><dt>destino</dt><dd>localStorage</dd></div>
+          <div><dt>backup</dt><dd>manual, em arquivo</dd></div>
+        </dl>
+        <p class="code-foot">Limpar os dados do navegador apaga o painel. O backup é a sua cópia de segurança.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section faq" id="duvidas">
+    <div class="wrap faq-grid">
+      <div class="faq-intro">
+        <h2>Perguntas diretas.</h2>
+        <p class="section-lede">O que costuma vir antes de abrir o app pela primeira vez.</p>
+      </div>
+
+      <div class="faq-list" id="faqList">
+        <div class="faq-item is-open">
+          <button class="faq-q" type="button" aria-expanded="true" aria-controls="faq-a-1" id="faq-q-1">
+            <span>Preciso criar uma conta?</span>
+            <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+          </button>
+          <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1" aria-hidden="false"><div><p>Não. O app abre direto no guia de configuração e funciona sem login. Não há e-mail, senha ou confirmação.</p></div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-2" id="faq-q-2">
+            <span>Onde ficam meus dados?</span>
+            <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+          </button>
+          <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2" aria-hidden="false" hidden><div><p>No armazenamento local do navegador que você está usando, em uma chave chamada <code>cofre_financas_v4</code>. Nenhuma informação financeira é enviada para servidores.</p></div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-3" id="faq-q-3">
+            <span>Se eu limpar o navegador, perco tudo?</span>
+            <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+          </button>
+          <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3" aria-hidden="false" hidden><div><p>Sim. Os dados vivem no navegador. Antes de limpar, abra as configurações do app e exporte um backup. Depois, use “Importar backup” para restaurar.</p></div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-4" id="faq-q-4">
+            <span>Como a fatura do cartão é calculada?</span>
+            <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+          </button>
+          <div class="faq-a" id="faq-a-4" role="region" aria-labelledby="faq-q-4" aria-hidden="false" hidden><div><p>Pelo ciclo real do cartão, entre o dia de fechamento atual e o próximo. Compras no crédito e parcelas com data dentro desse intervalo entram na fatura. O limite disponível é o limite total menos esse valor.</p></div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-5" id="faq-q-5">
+            <span>Os dados de mercado são em tempo real?</span>
+            <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+          </button>
+          <div class="faq-a" id="faq-a-5" role="region" aria-labelledby="faq-q-5" aria-hidden="false" hidden><div><p>Selic, IPCA e dólar PTAX vêm de fontes públicas e ficam em cache por algumas horas. As ações usam a brapi, com cache de 30 minutos e sandbox gratuito para alguns tickers. Você pode informar um token próprio.</p></div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-6" id="faq-q-6">
+            <span>Funciona no celular?</span>
+            <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+          </button>
+          <div class="faq-a" id="faq-a-6" role="region" aria-labelledby="faq-q-6" aria-hidden="false" hidden><div><p>Sim. O layout se adapta a telas pequenas, com menu lateral deslizante, tabelas roláveis e formulários em uma coluna. O mesmo backup serve para trocar de dispositivo.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <div class="final-card" data-reveal>
+        <h2>Menos planilha, mais clareza.</h2>
+        <p>Abra o app, responda o guia e veja o mês inteiro em uma tela.</p>
+        <a class="btn btn-primary btn-lg" href="app.html">
+          Abrir o app
+          <svg class="ico-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="#top" aria-label="Finanças, voltar ao topo">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        <span class="brand-name">Finanças <em>pessoal</em></span>
+      </a>
+      <p>Controle financeiro que roda inteiro no navegador.</p>
+    </div>
+    <nav class="footer-links" aria-label="Links do rodapé">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#calculos">Cálculos</a>
+      <a href="#duvidas">Dúvidas</a>
+      <a href="app.html">Abrir o app</a>
+    </nav>
+    <p class="footer-meta">versão 2.0.0 · HTML, CSS e JavaScript puro<br>Imagens com dados de exemplo.</p>
+  </div>
+</footer>
+
+<script src="apresentacao.js"></script>
+</body>
+</html>

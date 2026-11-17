@@ -1,0 +1,484 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finanças · controle financeiro pessoal</title>
+<meta name="description" content="Finanças — controle financeiro pessoal: saldo, cartões, contas, assinaturas e projeção de gastos no navegador.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b7a56" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a1a14" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b7a56'/%3E%3Ctext x='16' y='23' font-family='Arial,Helvetica,sans-serif' font-size='18' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.js" integrity="sha384-4W8gMhOYqk0FPg9sAMkb3g/P2fXtzbUyDUUgMlA1EEig8z/U/13EYUjErc1H382b" crossorigin="anonymous"></script>
+
+<script>(function(){try{if(localStorage.getItem('cofre_theme_v1')==='dark')document.documentElement.classList.add('theme-dark');}catch(e){}})();</script>
+<link rel="stylesheet" href="style.css?v=45">
+</head>
+<body>
+
+<a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
+
+<!-- Onboarding · quiz premium (split-screen) -->
+<div id="welcomeScreen" class="qz-screen hidden" aria-hidden="true">
+  <div class="qz-shell">
+    <aside class="qz-rail">
+      <div class="qz-rail-glow" aria-hidden="true"></div>
+      <div class="qz-rail-top">
+        <p class="qz-kicker">Configuração guiada</p>
+        <p class="qz-counter"><span id="qzCount">01</span><i>/</i><span id="qzTotal">11</span></p>
+        <h1 class="qz-rail-title">Vamos montar<br>seu painel.</h1>
+        <p class="qz-rail-sub">Algumas perguntas para deixar tudo pronto. Você decide o que responder.</p>
+        <ol class="qz-steps" id="qzSteps" aria-hidden="true"></ol>
+      </div>
+      <div class="qz-rail-foot">
+        <span class="qz-secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10" rx="2.2"></rect><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"></path></svg>Tudo fica salvo só neste navegador</span>
+        <button type="button" class="qz-skip" id="welcomeSkip">Pular</button>
+      </div>
+    </aside>
+    <main class="qz-stage">
+      <div class="qz-stage-head">
+        <div class="qz-track"><div class="qz-track-bar" id="qzBar"></div></div>
+        <span class="qz-step-label" id="wxStepLabel">Etapa 1 de 11</span>
+      </div>
+      <div class="qz-scroll">
+        <div class="qz-content" id="welcomeContent" aria-live="polite"></div>
+      </div>
+      <footer class="qz-footer">
+        <button type="button" class="qz-btn qz-ghost" id="welcomePrev">Voltar</button>
+        <button type="button" class="qz-btn qz-primary" id="welcomeNext">Começar agora</button>
+      </footer>
+    </main>
+  </div>
+</div>
+
+<div class="app">
+  <header class="topbar">
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    <div class="top-right">
+          <div class="top-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="search" id="topSearch" placeholder="Buscar..." aria-label="Buscar transações e cartões">
+          </div>
+          <button class="top-icon-btn" id="topNotif" aria-label="Notificações">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            <span class="top-badge" id="topBadge"></span>
+          </button>
+          <div class="top-user" onclick="openSettingsModal()" role="button" tabindex="0" aria-label="Minha conta" title="Configurações"><button class="top-avatar" aria-hidden="true" tabindex="-1"></button><span class="top-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+          <div class="top-pop" id="topPop" hidden>
+            <div class="top-pop-head"><strong>Notificações</strong></div>
+            <ul class="top-pop-list" id="topPopList"></ul>
+          </div>
+        </div>
+  </header>
+  <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+    <div class="brand">
+      <h1>Finanças</h1>
+      <span>pessoal</span>
+    </div>
+    <div class="side-section">Menu</div>
+    <button class="nav-item active" data-page="dashboard" aria-current="page"><span class="ni-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg></span><span>Painel</span></button>
+    <button class="nav-item" data-page="transacoes"><span class="ni-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg></span><span>Transações</span></button>
+    <button class="nav-item" data-page="rendas"><span class="ni-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2.5"></rect><circle cx="12" cy="12" r="2.4"></circle><path d="M6 12h.01M18 12h.01"></path></svg></span><span>Rendas</span></button>
+    <div class="side-section">Gestão</div>
+    <button class="nav-item" data-page="apagar"><span class="ni-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span><span>A pagar</span></button>
+    <button class="nav-item" data-page="cartoes"><span class="ni-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg></span><span>Cartões</span></button>
+    <button class="nav-item" data-page="contas"><span class="ni-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"></line><line x1="6" y1="18" x2="6" y2="11"></line><line x1="10" y1="18" x2="10" y2="11"></line><line x1="14" y1="18" x2="14" y2="11"></line><line x1="18" y1="18" x2="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg></span><span>Contas</span></button>
+    <button class="nav-item" data-page="assinaturas"><span class="ni-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg></span><span>Assinaturas</span></button>
+    <button class="nav-item" data-page="parcelas"><span class="ni-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></span><span>Parcelados</span></button>
+    <div class="side-section">Mercado</div>
+    <button class="nav-item" data-page="investimentos"><span class="ni-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span><span>Mercado</span></button>
+    <div class="sidebar-footer">Dados salvos localmente<br>neste navegador.<br><button class="cat-link" onclick="openCatModal()">Categorias</button><br><button class="reset-link" onclick="resetAll()">Zerar dados</button><button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"><span class="theme-ico"></span><span>Alternar tema</span></button><button class="quiz-link" onclick="restartWelcome()" title="Rever a configuração guiada"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path></svg>Refazer o quiz</button><a class="about-link" href="index.html" title="Entenda como o sistema funciona">Como funciona</a></div>
+  </aside>
+
+  <main class="main" id="mainContent">
+
+    <section id="page-dashboard" class="page">
+      <div class="page-head">
+        <div>
+          <h2 id="greetingTitle">Olá, usuario</h2>
+        </div>
+      </div>
+      <div class="bento" id="bentoGrid"></div>
+    </section>
+
+    <section id="page-transacoes" class="page hidden">
+      <div class="page-head">
+        <div>
+          <h2>Transações</h2>
+          <p class="sub" id="txSub"></p>
+        </div>
+      </div>
+      <div class="filters">
+        <input type="text" id="fSearch" placeholder="Buscar descrição...">
+        <select id="fCategoria"></select>
+        <select id="fTipo">
+          <option value="">Todos os tipos</option>
+          <option value="avista">À vista</option>
+          <option value="parcelado">Parcelado</option>
+          <option value="credito">Cartão de crédito</option>
+          <option value="debito">Débito</option>
+          <option value="pix">Pix</option>
+          <option value="boleto">Boleto</option>
+        </select>
+        <select id="fConta"></select>
+        <input type="month" id="fMes">
+        <button class="btn btn-ghost btn-sm" onclick="clearFilters()">Limpar filtros</button>
+      </div>
+      <div class="table-card">
+        <div class="table-wrap">
+        <table>
+          <thead><tr><th>Descrição</th><th>Categoria</th><th>Tipo</th><th>Conta/Cartão</th><th>Data</th><th style="text-align:right;">Valor</th><th></th></tr></thead>
+          <tbody id="txTableBody"></tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="page-rendas" class="page hidden">
+      <div class="page-head">
+        <div>
+          <h2>Rendas e recebimentos</h2>
+          <p class="sub" id="rendasSub"></p>
+        </div>
+        <button class="btn btn-primary" onclick="openIncomeModal()">+ Nova renda</button>
+      </div>
+      <div id="rendasSummary"></div>
+      <div id="rendasList"></div>
+    </section>
+
+    <section id="page-apagar" class="page hidden">
+      <div class="page-head">
+        <div>
+          <h2>A pagar</h2>
+          <p class="sub">Projeção de contas para os próximos meses, incluindo parcelas, faturas e assinaturas.</p>
+        </div>
+      </div>
+      <div id="apagarContent"></div>
+    </section>
+    <section id="page-cartoes" class="page hidden">
+          <div class="cc-shell">
+            <div class="cc-head">
+              <div class="cc-headl">
+                <div>
+                  <h2 id="ccTitle">Cartões</h2>
+                  <p class="sub">Acompanhe suas faturas, limite disponível e gerencie seus cartões em um só lugar.</p>
+                </div>
+              </div>
+            </div>
+            <div class="cc-lower">
+              <div class="cc-main">
+                <div class="cc-tiles" id="cardsGrid"></div>
+                <section class="cc-fatpanel" id="ccFatura"></section>
+              </div>
+              <div class="cc-rail">
+                <section class="cc-panel" id="ccResumo"></section>
+                <section class="cc-nextpanel">
+                  <div class="cc-panel-head"><h3>Próximas faturas</h3><button class="cc-go" id="ccNextGo" aria-label="Ver próxima fatura"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></button></div>
+                  <div id="ccProximasList"></div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </section>
+
+    <section id="page-contas" class="page hidden">
+      <div class="page-head">
+        <div><h2>Contas bancárias</h2><p class="sub" id="accountsSub"></p></div>
+        <button class="btn btn-primary" onclick="openAccountModal()">+ Nova conta</button>
+      </div>
+      <div id="accountsSummary"></div>
+      <div id="accountsGrid"></div>
+    </section>
+
+    <section id="page-assinaturas" class="page hidden">
+      <div class="page-head">
+        <div><h2>Assinaturas recorrentes</h2><p class="sub" id="subsSub"></p></div>
+        <button class="btn btn-primary" onclick="openSubModal()">+ Nova assinatura</button>
+      </div>
+      <div id="subsSummary"></div>
+      <div id="subsList"></div>
+    </section>
+
+    <section id="page-parcelas" class="page hidden">
+      <div class="page-head">
+        <div><h2>Compras parceladas</h2><p class="sub" id="parcelasSub"></p></div>
+      </div>
+      <div id="parcelasSummary"></div>
+      <div class="grid-3" id="parcelasGrid"></div>
+    </section>
+
+    <section id="page-investimentos" class="page hidden">
+      <div class="page-head">
+        <div>
+          <h2>Mercado</h2>
+          <p class="sub">Indicadores macro e cotações em tempo real.</p>
+        </div>
+        <span class="settings-link" onclick="openSettingsModal()">Configurações API</span>
+      </div>
+      <div class="macro-row" id="macroRow"></div>
+      <div class="page-head" style="margin-top:8px;">
+        <div>
+          <h3 style="font-family:var(--font-ui);font-size:1.15rem;">Watchlist</h3>
+          <p class="sub" id="watchlistSub"></p>
+        </div>
+        <div class="watchlist-bar">
+          <input type="text" id="addTickerInput" placeholder="Ex: BBAS3" maxlength="6">
+          <button class="btn btn-primary btn-sm" onclick="addToWatchlist()">Adicionar</button>
+        </div>
+      </div>
+      <div class="table-card">
+        <div class="table-wrap">
+        <table>
+          <thead><tr><th>Ativo</th><th>Nome</th><th style="text-align:right;">Cotação</th><th style="text-align:right;">Variação</th><th style="text-align:right;">Variação %</th><th style="text-align:right;">Market Cap</th><th></th></tr></thead>
+          <tbody id="watchlistBody"></tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<button class="fab" onclick="openTxModal()" aria-label="Nova transação" title="Nova transação">
+  <svg class="fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+  <span class="fab-label">Nova transação</span>
+</button>
+
+<div class="overlay" id="txOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="txModalTitle">
+    <button class="close-x" onclick="closeModal('txOverlay')" aria-label="Fechar">&times;</button>
+    <h3 id="txModalTitle">Nova transação</h3>
+    <p class="modal-sub" id="txModalSub">Registre em poucos cliques.</p>
+    <div class="field">
+      <label>Tipo</label>
+      <div class="tx-type-grid" id="txTypeGrid">
+        <div class="tx-type-opt sel-saida" data-v="saida">Saída</div>
+        <div class="tx-type-opt" data-v="entrada">Entrada</div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Forma de pagamento</label>
+      <div class="paytype-grid" id="paytypeGrid">
+        <div class="paytype-opt" data-v="pix">Pix</div>
+        <div class="paytype-opt" data-v="debito">Débito</div>
+        <div class="paytype-opt" data-v="avista">Dinheiro/à vista</div>
+        <div class="paytype-opt" data-v="credito">Crédito à vista</div>
+        <div class="paytype-opt" data-v="parcelado">Crédito parcelado</div>
+        <div class="paytype-opt" data-v="boleto">Boleto</div>
+      </div>
+    </div>
+    <div class="field"><label>Descrição</label><input type="text" id="txDesc" placeholder="Ex: Supermercado Pão de Açúcar"></div>
+    <div class="field-row">
+      <div class="field"><label>Valor total (R$)</label><input type="number" id="txValor" step="0.01" placeholder="0,00"></div>
+      <div class="field"><label>Data</label><input type="date" id="txData"></div>
+    </div>
+    <div class="field-row" id="parcelasField" style="display:none;">
+      <div class="field"><label>Número de parcelas</label><input type="number" id="txParcelas" min="2" max="48" value="2"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Categoria <span class="link-btn" onclick="openCatModal()">+ nova</span></label><select id="txCategoria"></select></div>
+      <div class="field" id="txContaField"><label id="lblConta">Conta / Cartão</label><select id="txConta"></select></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('txOverlay')">Cancelar</button>
+      <button class="btn btn-primary" id="txSaveBtn" onclick="saveTx()">Salvar transação</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="cardOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="cardModalTitle">
+    <button class="close-x" onclick="closeModal('cardOverlay')" aria-label="Fechar">&times;</button>
+    <h3 id="cardModalTitle">Novo cartão</h3>
+    <p class="modal-sub">Cadastre limite, datas de fatura e cor do cartão.</p>
+    <div class="field"><label>Nome do cartão</label><input type="text" id="cardNome" placeholder="Ex: Nubank Ultravioleta"></div>
+    <div class="field"><label>Banco / emissor</label><input type="text" id="cardBanco" placeholder="Ex: Nubank"></div>
+    <div class="field"><label>Limite total (R$)</label><input type="number" id="cardLimite" step="0.01"></div>
+    <div class="field-row">
+      <div class="field"><label>Dia de fechamento</label><input type="number" id="cardFechamento" min="1" max="31"></div>
+      <div class="field"><label>Dia de vencimento</label><input type="number" id="cardVencimento" min="1" max="31"></div>
+    </div>
+    <div class="field">
+      <label>Cor do cartão</label>
+      <div class="cc-palette" id="cardPalette"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('cardOverlay')">Cancelar</button>
+      <button class="btn btn-primary" id="cardSaveBtn" onclick="saveCard()">Salvar cartão</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="accountOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="accTitle">
+    <button class="close-x" onclick="closeModal('accountOverlay')" aria-label="Fechar">&times;</button>
+    <h3 id="accTitle">Nova conta</h3>
+    <p class="modal-sub">Adicione uma conta bancária.</p>
+    <div class="field"><label>Nome do banco</label><input type="text" id="accNome" placeholder="Ex: Nubank"></div>
+    <div class="field-row">
+      <div class="field"><label>Tipo</label><select id="accTipo"><option value="corrente">Conta corrente</option><option value="poupanca">Poupança</option><option value="investimento">Investimento</option></select></div>
+      <div class="field"><label>Saldo atual (R$)</label><input type="number" id="accSaldo" step="0.01" value="0"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('accountOverlay')">Cancelar</button>
+      <button class="btn btn-primary" id="accSaveBtn" onclick="saveAccount()">Salvar conta</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="subOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="subModalTitle">
+    <button class="close-x" onclick="closeModal('subOverlay')" aria-label="Fechar">&times;</button>
+    <h3 id="subModalTitle">Nova assinatura</h3>
+    <p class="modal-sub" id="subModalSub">Serviços cobrados todo mês.</p>
+    <div class="field"><label>Nome do serviço</label><input type="text" id="subNome" placeholder="Ex: Spotify Família"></div>
+    <div class="field-row">
+      <div class="field"><label>Valor mensal (R$)</label><input type="number" id="subValor" step="0.01"></div>
+      <div class="field"><label>Dia de cobrança</label><input type="number" id="subDia" min="1" max="31"></div>
+    </div>
+    <div class="field"><label>Categoria <span class="link-btn" onclick="openCatModal()">+ nova</span></label><select id="subCategoria"></select></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('subOverlay')">Cancelar</button>
+      <button class="btn btn-primary" id="subSaveBtn" onclick="saveSub()">Salvar assinatura</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="payOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="payTitle">
+    <button class="close-x" onclick="closeModal('payOverlay')" aria-label="Fechar">&times;</button>
+    <h3 id="payTitle">Pagar</h3>
+    <p class="modal-sub" id="paySub"></p>
+    <div class="pay-total"><span>Valor a pagar</span><b id="payAmt">R$ 0,00</b></div>
+    <div class="field">
+      <label>De qual conta sai o valor?</label>
+      <div class="pay-list" id="payAccList"></div>
+    </div>
+    <p class="pay-note" id="payNote"></p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('payOverlay')">Cancelar</button>
+      <button class="btn btn-primary" onclick="confirmPay()">Confirmar pagamento</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="catOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="catModalTitle">
+    <button class="close-x" onclick="closeModal('catOverlay')" aria-label="Fechar">&times;</button>
+    <h3 id="catModalTitle">Categorias</h3>
+    <p class="modal-sub">Crie categorias personalizadas para seus gastos.</p>
+    <div class="field"><label>Nome da nova categoria</label><input type="text" id="catNome" placeholder="Ex: Pets, Viagens, Presentes"></div>
+    <div class="field"><label>Cor</label><div class="cat-color-grid" id="catColorGrid"></div></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('catOverlay')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveCat()">Adicionar categoria</button>
+    </div>
+    <div style="margin-top:18px;border-top:1px solid var(--line);padding-top:14px;">
+      <div style="font-size:0.72rem;color:var(--ink-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.04em;">Categorias personalizadas</div>
+      <div id="catList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="settingsOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsModalTitle">
+    <button class="close-x" onclick="closeModal('settingsOverlay')" aria-label="Fechar">&times;</button>
+    <h3 id="settingsModalTitle">Configurações de API</h3>
+    <p class="modal-sub">Configure acesso a dados de mercado em tempo real.</p>
+    <div class="field">
+      <label>Token brapi.dev (opcional)</label>
+      <input type="text" id="brapiToken" placeholder="Deixe vazio para sandbox">
+      <p class="field-hint">Sandbox gratuito inclui PETR4, VALE3, MGLU3, ITUB4 sem token. Para mais ativos, crie uma conta grátis em brapi.dev</p>
+    </div>
+    <div class="field">
+      <label>Backup de dados</label>
+      <p class="field-hint">Salve uma cópia de tudo (contas, cartões, transações) ou restaure de um arquivo.</p>
+      <div class="backup-row">
+        <button class="btn btn-ghost" onclick="exportBackup()">Exportar backup</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('backupFile').click()">Importar backup</button>
+        <input type="file" id="backupFile" accept="application/json,.json" hidden onchange="importBackupFile(this)">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('settingsOverlay')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveSettings()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="incomeOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="incomeModalTitle">
+    <button class="close-x" onclick="closeModal('incomeOverlay')" aria-label="Fechar">&times;</button>
+    <h3 id="incomeModalTitle">Nova renda</h3>
+    <p class="modal-sub" id="incomeModalSub">Cadastre salário, vales e outras entradas fixas.</p>
+    <div class="field"><label>Descrição</label><input type="text" id="incNome" placeholder="Ex: Salário, Vale refeição, Aluguel recebido"></div>
+    <div class="field"><label>Valor por recebimento (R$)</label><input type="number" id="incValor" step="0.01" placeholder="0,00"></div>
+    <div class="field">
+      <label>Tipo</label>
+      <div class="inc-kind-grid" id="incTipoGrid">
+        <div class="inc-kind-opt" data-v="salario" onclick="setIncomeTipo('salario')">Salário</div>
+        <div class="inc-kind-opt" data-v="vale" onclick="setIncomeTipo('vale')">Vale / Benefício</div>
+        <div class="inc-kind-opt" data-v="outro" onclick="setIncomeTipo('outro')">Outra entrada</div>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Quando você recebe?</label>
+        <select id="incQuando" onchange="setIncomeQuando()">
+          <option value="quinto-dia-util">5º dia útil do mês</option>
+          <option value="ultimo-dia">Último dia do mês</option>
+          <option value="dia-fixo">Dia fixo do mês</option>
+        </select>
+      </div>
+      <div class="field" id="incDiaField" style="display:none;">
+        <label>Dia do mês</label>
+        <input type="number" id="incDia" min="1" max="31" placeholder="Ex: 20" oninput="incomePreview()">
+      </div>
+    </div>
+    <p class="field-hint" id="incPreview"></p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('incomeOverlay')">Cancelar</button>
+      <button class="btn btn-primary" id="incSaveBtn" onclick="saveIncome()">Salvar renda</button>
+    </div>
+  </div>
+</div>
+
+<div class="cc-modal-overlay" id="faturaOverlay" hidden>
+  <div class="cc-modal" role="dialog" aria-modal="true" aria-labelledby="faturaModalTitle">
+    <div class="cc-modal-head">
+      <div>
+        <span class="cc-modal-eyebrow">Fatura atual</span>
+        <h3 id="faturaModalTitle">Cartão</h3>
+      </div>
+      <button class="cc-modal-close" id="faturaModalClose" aria-label="Fechar">&#10005;</button>
+    </div>
+    <div id="faturaModalBody"></div>
+  </div>
+</div>
+
+<div id="fatalScreen" class="fatal-screen" role="alertdialog" aria-modal="true" aria-labelledby="fatalTitle" aria-describedby="fatalDesc" hidden>
+  <div class="fatal-card">
+    <div class="fatal-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.73 18 13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></div>
+    <h2 id="fatalTitle">Algo deu errado</h2>
+    <p id="fatalDesc">Não foi possível carregar o aplicativo.</p>
+    <div class="fatal-actions">
+      <button type="button" class="btn btn-ghost" id="fatalSecondary" hidden>Restaurar padrão</button>
+      <button type="button" class="btn btn-primary" id="fatalReload">Recarregar</button>
+    </div>
+    <p class="fatal-hint">Seus dados continuam salvos somente neste navegador.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"><span class="dot" aria-hidden="true"></span><span id="toastMsg"></span><button type="button" class="toast-action" id="toastAction" hidden>Desfazer</button></div>
+
+<script src="script.js?v=47"></script>
+</body>
+</html>
